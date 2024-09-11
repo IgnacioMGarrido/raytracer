@@ -4,8 +4,8 @@ project(raytracer)
 add_subdirectory(vendor/sdl EXCLUDE_FROM_ALL)
 # Create your game executable target as usual
 set(SOURCES vendor/qbLinAlg/qbVector4.hpp vendor/qbLinAlg/qbVector.h vendor/qbLinAlg/qbVector2.hpp vendor/qbLinAlg/qbVector3.hpp vendor/qbLinAlg/qbMatrix33.hpp vendor/qbLinAlg/qbMatrix44.hpp vendor/qbLinAlg/qbPCA.h vendor/qbLinAlg/qbQR.h vendor/qbLinAlg/qbLinSolve.h vendor/qbLinAlg/qbLSQ.h vendor/qbLinAlg/qbMatrix.h vendor/qbLinAlg/qbEIG.h)
-set(RAYTRACER src/CApp.cpp src/include/CApp.h)
-add_executable(raytracer src/main.cpp ${RAYTRACER} ${SOURCES})
+set(RAYTRACER src/raytracer/RTImage.h src/raytracer/RTImage.cpp)
+add_executable(raytracer src/main.cpp src/CApp.cpp src/CApp.h ${RAYTRACER} ${SOURCES})
 
 target_include_directories(raytracer PRIVATE vendor/qbLinAlg)
 

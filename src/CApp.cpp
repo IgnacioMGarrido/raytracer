@@ -1,4 +1,4 @@
-#include "include/CApp.h"
+#include "CApp.h"
 
 CApp::~CApp()
 {
@@ -27,8 +27,19 @@ bool CApp::OnInit()
 		return false;
 	}
 
-	return true;
+	m_image.Init(1280, 720, m_renderer);
 
+	for (int x = 0; x < 1280; x++)
+	{
+		for (int y = 0; y < 720; y++)
+		{
+			double red = (static_cast<double>(x) / 1280) * 255.0;
+			double green = (static_cast<double>(y) / 720) * 255.0;
+			m_image.SetPixel(x, y, red, green, 0.0);
+		}
+	}
+
+	return true;
 }
 
 int CApp::OnExecute()
@@ -39,8 +50,8 @@ int CApp::OnExecute()
 		return -1;
 	}
 	
-    while (m_isRunning)
-    {
+	while (m_isRunning)
+	{
 		while (SDL_PollEvent(&ev) != 0)
 		{
 			OnEvent(&ev);
@@ -71,9 +82,8 @@ void CApp::OnRender()
 {
 	SDL_SetRenderDrawColor(m_renderer, 0, 0, 0, 0);
 	SDL_RenderClear(m_renderer); 
-	SDL_SetRenderDrawColor(m_renderer, 255, 0, 0, 255);
-	SDL_RenderDrawPoint(m_renderer, 100, 100);
 
+	m_image.Display();
 	SDL_RenderPresent(m_renderer);
 }
 
